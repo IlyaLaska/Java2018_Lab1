@@ -3,10 +3,10 @@ package com.laska;
 import java.util.Scanner;
 
 class Matrix {
-    private byte size;
     private byte[][] matrix;
 
     Matrix() {
+        byte size = 0;
         System.out.print("Please enter desired Matrix size: ");
         Scanner scan = new Scanner(System.in);
         while (scan.hasNext()) {
@@ -28,9 +28,9 @@ class Matrix {
      */
     void print() {
         System.out.println("The matrix is:");
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                System.out.print(matrix[i][j] + "  ");
+        for (byte[] matrixRow : matrix) {
+            for (byte b : matrixRow) {
+                System.out.print(b + "  ");
             }
             System.out.println();
         }
@@ -42,8 +42,8 @@ class Matrix {
     void fillMatrix() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Please fill the matrix with values:");
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
                 System.out.print("Please enter element " + (i + 1) + " " + (j + 1) + ":");
                 while (scanner.hasNext()) {
                     if (scanner.hasNextByte()) {
@@ -64,8 +64,8 @@ class Matrix {
      * fill Matrix with random values
      */
     void fillMatrixRand() {
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
                 matrix[i][j] = (byte) ((Math.random() * 256) - 128);
             }
         }
@@ -79,7 +79,7 @@ class Matrix {
      * @param X horizontal desired position for min element
      */
     void moveMin(int Y, int X) {
-        if (Y >= size || X >= size) {
+        if (Y >= matrix.length || X >= matrix.length) {
             System.out.println("invalid arguments");
             return;
         }
@@ -87,8 +87,8 @@ class Matrix {
         int minY = 0;
         int minX = 0;
         //finding min value and its X & Y position
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix.length; j++) {
                 if (matrix[i][j] < min) {
                     min = matrix[i][j];
                     minY = i;
@@ -100,7 +100,7 @@ class Matrix {
         if (Y != minY) {//on different lines
             if (minY < Y) {
                 while (minY < Y) {//TODO try while(lower++)
-                    for (int i = 0; i < size; i++) {
+                    for (int i = 0; i < matrix.length; i++) {
                         byte temp = matrix[minY][i];
                         matrix[minY][i] = matrix[Y][i];
                         matrix[Y][i] = temp;
@@ -109,7 +109,7 @@ class Matrix {
                 }
             } else {//Y < minY
                 while (Y < minY) {//TODO try while(lower++)
-                    for (int i = 0; i < size; i++) {
+                    for (int i = 0; i < matrix.length; i++) {
                         byte temp = matrix[Y][i];
                         matrix[Y][i] = matrix[minY][i];
                         matrix[minY][i] = temp;
@@ -122,7 +122,7 @@ class Matrix {
         if (X != minX) {//on different lines
             if (minX < X) {
                 while (minX < X) {//TODO try while(lower++)
-                    for (int i = 0; i < size; i++) {
+                    for (int i = 0; i < matrix.length; i++) {
                         byte temp = matrix[i][minX];
                         matrix[i][minX] = matrix[i][X];
                         matrix[i][X] = temp;
@@ -131,7 +131,7 @@ class Matrix {
                 }
             } else {//X < minX
                 while (X < minX) {//TODO try while(lower++)
-                    for (int i = 0; i < size; i++) {
+                    for (int i = 0; i < matrix.length; i++) {
                         byte temp = matrix[i][X];
                         matrix[i][X] = matrix[i][minX];
                         matrix[i][minX] = temp;
