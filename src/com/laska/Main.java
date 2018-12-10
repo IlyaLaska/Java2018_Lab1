@@ -8,8 +8,8 @@ public class Main {
         m.print();
         m.fillMatrixRand();
         m.print();
-        System.out.println("Moving!");
-        m.moveMin(1, 1);
+        System.out.println("Moving minimal element to new position!");
+        m.moveMinRead();
         m.print();
     }
 }
